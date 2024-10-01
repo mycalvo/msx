@@ -1,6 +1,6 @@
 {    
-    "name": "Start StremioMSX",
+    "name": "Antontv",
     "version": "1.0.0",
-    "parameter": "content:https://bartche.github.io/msx/data/content.json",
+    "parameter": "content:https://pepopepopepo.github.io/msx/data/content.json",
     "welcome": "none"
 }
