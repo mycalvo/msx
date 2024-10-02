@@ -1,0 +1,499 @@
+<html><head><base href="https://api.example.com/"><style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+#app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.input-section, .info-section {
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"], select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#channelList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.channel {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.channel:hover {
+  transform: scale(1.05);
+}
+
+.channel img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.channel p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#videoPlayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#videoPlayer video {
+  max-width: 90%;
+  max-height: 80%;
+}
+
+#backButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #f44336;
+}
+
+#backButton:hover {
+  background-color: #d32f2f;
+}
+
+#errorMessage {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  display: none;
+}
+
+.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+#infoModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style></head><body>
+<div id="app">
+  <h1>IPTV Streaming App</h1>
+  
+  <div id="errorMessage"></div>
+  
+  <div class="input-section">
+    <div class="input-group">
+      <label for="sourceType">Source Type:</label>
+      <select id="sourceType">
+        <option value="m3u">M3U List</option>
+        <option value="xtream">Xtream API</option>
+      </select>
+    </div>
+    
+    <div id="m3uInput">
+      <div class="input-group">
+        <label for="m3uUrl">M3U URL:</label>
+        <input type="text" id="m3uUrl" placeholder="Enter M3U URL or leave blank for offline file">
+      </div>
+      <div class="input-group">
+        <label for="m3uFile">Or select a local M3U file:</label>
+        <input type="file" id="m3uFile" accept=".m3u,.m3u8">
+      </div>
+    </div>
+    
+    <div id="xtreamInput" style="display:none;">
+      <div class="input-group">
+        <label for="xtreamUrl">Xtream URL:</label>
+        <input type="text" id="xtreamUrl" placeholder="Enter Xtream API URL">
+      </div>
+      <div class="input-group">
+        <label for="xtreamUser">Username:</label>
+        <input type="text" id="xtreamUser">
+      </div>
+      <div class="input-group">
+        <label for="xtreamPass">Password:</label>
+        <input type="password" id="xtreamPass">
+      </div>
+    </div>
+    
+    <button onclick="loadChannels()">Load Channels</button>
+    <button onclick="showInfo()">Info</button>
+  </div>
+  
+  <div id="channelList"></div>
+</div>
+
+<div id="videoPlayer">
+  <button id="backButton" onclick="closePlayer()">Back</button>
+  <video id="videoElement" controls></video>
+</div>
+
+<div id="infoModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeInfoModal()">&times;</span>
+    <h2>IPTV Information</h2>
+    <div id="infoContent"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js"></script>
+<script>
+const sourceTypeSelect = document.getElementById('sourceType');
+const m3uInput = document.getElementById('m3uInput');
+const xtreamInput = document.getElementById('xtreamInput');
+const channelList = document.getElementById('channelList');
+const videoPlayer = document.getElementById('videoPlayer');
+const videoElement = document.getElementById('videoElement');
+const errorMessage = document.getElementById('errorMessage');
+const infoModal = document.getElementById('infoModal');
+const infoContent = document.getElementById('infoContent');
+
+let appInfo = {
+  totalChannels: 0,
+  listSize: 0,
+  expirationDate: null,
+  connectedUsers: 0,
+  totalUsers: 0
+};
+
+sourceTypeSelect.addEventListener('change', function() {
+  if (this.value === 'm3u') {
+    m3uInput.style.display = 'block';
+    xtreamInput.style.display = 'none';
+  } else {
+    m3uInput.style.display = 'none';
+    xtreamInput.style.display = 'block';
+  }
+});
+
+async function loadM3UFromUrl(url) {
+  try {
+    let response;
+    try {
+      response = await fetch(url);
+    } catch (fetchError) {
+      console.error('Direct fetch failed:', fetchError);
+      const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+      response = await fetch(corsProxyUrl + url);
+    }
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
+    }
+    const text = await response.text();
+    parseM3U(text);
+    appInfo.listSize = text.length;
+    showError(`Successfully loaded M3U list. Server response: ${response.status} ${response.statusText}`, 'success');
+  } catch (error) {
+    console.error('Error loading M3U from URL:', error);
+    
+    try {
+      const text = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onload = () => resolve(xhr.responseText);
+        xhr.onerror = () => reject(new Error('XMLHttpRequest failed'));
+        xhr.send();
+      });
+      parseM3U(text);
+      appInfo.listSize = text.length;
+      showError(`Successfully loaded M3U list using fallback method.`, 'success');
+    } catch (xhrError) {
+      console.error('XMLHttpRequest fallback failed:', xhrError);
+      throw new Error(`Error loading M3U list. ${error.message}. Fallback also failed.`);
+    }
+  }
+}
+
+async function loadChannels() {
+  channelList.innerHTML = 'Loading...';
+  errorMessage.style.display = 'none';
+  
+  try {
+    if (sourceTypeSelect.value === 'm3u') {
+      const m3uUrl = document.getElementById('m3uUrl').value;
+      const m3uFile = document.getElementById('m3uFile').files[0];
+      
+      if (m3uUrl) {
+        await loadM3UFromUrl(m3uUrl);
+      } else if (m3uFile) {
+        await loadM3UFromFile(m3uFile);
+      } else {
+        throw new Error('Please provide an M3U URL or file.');
+      }
+    } else {
+      const xtreamUrl = document.getElementById('xtreamUrl').value;
+      const xtreamUser = document.getElementById('xtreamUser').value;
+      const xtreamPass = document.getElementById('xtreamPass').value;
+      
+      if (xtreamUrl && xtreamUser && xtreamPass) {
+        await loadXtreamChannels(xtreamUrl, xtreamUser, xtreamPass);
+      } else {
+        throw new Error('Please provide Xtream API credentials.');
+      }
+    }
+  } catch (error) {
+    console.error('Error in loadChannels:', error);
+    showError(`Failed to load channels: ${error.message}`);
+    channelList.innerHTML = 'Failed to load channels. Please try again.';
+  }
+}
+
+async function loadM3UFromFile(file) {
+  try {
+    const text = await file.text();
+    parseM3U(text);
+    appInfo.listSize = file.size;
+  } catch (error) {
+    console.error('Error loading M3U from file:', error);
+    throw new Error('Error loading M3U file. Please check the file and try again.');
+  }
+}
+
+function parseM3U(content) {
+  const lines = content.split('\n');
+  const channels = [];
+  let currentChannel = null;
+
+  for (const line of lines) {
+    if (line.startsWith('#EXTINF:')) {
+      const parts = line.split(',');
+      currentChannel = {
+        name: parts[1].trim(),
+        logo: '',
+        url: ''
+      };
+      
+      const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
+      if (tvgLogoMatch) {
+        currentChannel.logo = tvgLogoMatch[1];
+      }
+    } else if (line.trim() !== '' && !line.startsWith('#') && currentChannel) {
+      currentChannel.url = line.trim();
+      channels.push(currentChannel);
+      currentChannel = null;
+    }
+  }
+
+  appInfo.totalChannels = channels.length;
+  displayChannels(channels);
+}
+
+async function loadXtreamChannels(url, username, password) {
+  try {
+    const response = await fetch(`${url}/player_api.php?username=${username}&password=${password}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    if (data.user_info && data.categories) {
+      const liveStreams = await fetch(`${url}/player_api.php?username=${username}&password=${password}&action=get_live_streams`);
+      if (!liveStreams.ok) {
+        throw new Error(`HTTP error! status: ${liveStreams.status}`);
+      }
+      const streams = await liveStreams.json();
+      
+      const channels = streams.map(stream => ({
+        name: stream.name,
+        logo: stream.stream_icon,
+        url: `${url}/${username}/${password}/${stream.stream_id}`
+      }));
+      
+      appInfo.totalChannels = channels.length;
+      appInfo.expirationDate = new Date(data.user_info.exp_date * 1000).toLocaleString();
+      appInfo.connectedUsers = data.user_info.active_cons;
+      appInfo.totalUsers = data.user_info.max_connections;
+      
+      displayChannels(channels);
+    } else {
+      throw new Error('Invalid Xtream API response');
+    }
+  } catch (error) {
+    console.error('Error loading Xtream channels:', error);
+    throw new Error('Error loading Xtream channels. Please check your credentials and try again.');
+  }
+}
+
+function displayChannels(channels) {
+  channelList.innerHTML = '';
+  channels.forEach(channel => {
+    const channelElement = document.createElement('div');
+    channelElement.className = 'channel';
+    channelElement.innerHTML = `
+      <img src="${channel.logo || 'https://via.placeholder.com/80'}" alt="${channel.name}" onerror="this.src='https://via.placeholder.com/80'">
+      <p>${channel.name}</p>
+    `;
+    channelElement.onclick = () => playChannel(channel.url);
+    channelList.appendChild(channelElement);
+  });
+}
+
+function playChannel(url) {
+  videoElement.src = url;
+  videoPlayer.style.display = 'flex';
+  
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(videoElement);
+    hls.on(Hls.Events.ERROR, function (event, data) {
+      if (data.fatal) {
+        switch(data.type) {
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            showError('Network error while playing the stream. Trying to recover...');
+            hls.startLoad();
+            break;
+          case Hls.ErrorTypes.MEDIA_ERROR:
+            showError('Media error while playing the stream. Trying to recover...');
+            hls.recoverMediaError();
+            break;
+          default:
+            showError('Fatal error while playing the stream. Playback cannot continue.');
+            hls.destroy();
+            break;
+        }
+      }
+    });
+  } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+    videoElement.src = url;
+  } else {
+    showError('Your browser does not support HLS playback.');
+    return;
+  }
+  
+  videoElement.play().catch(e => {
+    showError('Failed to start playback. Please try again.');
+  });
+}
+
+function closePlayer() {
+  videoElement.pause();
+  videoElement.src = '';
+  videoPlayer.style.display = 'none';
+}
+
+function showError(message, type = 'error') {
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+  errorMessage.className = type === 'error' ? 'error' : 'success';
+}
+
+function showInfo() {
+  infoContent.innerHTML = `
+    <p>Total Channels: ${appInfo.totalChannels}</p>
+    <p>List Size: ${appInfo.listSize} bytes</p>
+    <p>Expiration Date: ${appInfo.expirationDate || 'N/A'}</p>
+    <p>Connected Users: ${appInfo.connectedUsers || 'N/A'}</p>
+    <p>Total Users: ${appInfo.totalUsers || 'N/A'}</p>
+  `;
+  infoModal.style.display = 'block';
+}
+
+function closeInfoModal() {
+  infoModal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+  if (event.target == infoModal) {
+    infoModal.style.display = "none";
+  }
+}
+</script>
+</body></html>
