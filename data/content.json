@@ -1,1 +1,4 @@
+{
+  "action": "link:https://google.com"
+}
 "content:request:interaction:init@https://google.com"
