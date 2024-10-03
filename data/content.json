@@ -1,3 +1,3 @@
 {
-  "action": "link:request:interaction:init@https://google.com"
+  "action": "link:interaction:init@https://google.com"
 }
