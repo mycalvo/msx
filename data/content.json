@@ -1,3 +1,3 @@
 {
-  "action": "link:https://google.com"
+  "action": "link:window:https://google.com"
 }
