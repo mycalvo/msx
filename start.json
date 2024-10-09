@@ -1,0 +1,60 @@
+{
+    "name": "msx free 4you",
+    "type": "list",
+    "extension": "{ico:msx-white:event} {now:date:dd.mm.yyyy}{tb}{ico:msx-white:access-time} {now:time:hh:mm}",
+    "background": "https://raw.githubusercontent.com/ercua/msx/main/msx/img/HXoGeOC.png",
+    "headline": "msx free servises",
+    "version": "1.0.1",
+    "parameter": "content:https://msx.pp.ua/msx/start.json",
+    "action": "[settings:validate_links:0|home]",
+    "launcher": {
+       "image": "https://avatars.githubusercontent.com/u/23138402?v=4"
+    },
+    "template": {
+       "type": "separate",
+       "layout": "0,0,2,3",
+       "alignment": "title-center",
+       "color": "msx-glass"
+    },
+    "items": [
+       {
+          "title": "Lampa",
+          "image": "https://msx.pp.ua/msx/img/lampa.jpg",
+          "action": "link:http://lampa.mx/"
+       },
+       {
+          "title": "Atodo",
+          "image": "https://msx.pp.ua/msx/img/atodo.png",
+          "action": "menu:request:interaction:menu@http://atodo.fun/fun.html"
+       },
+       {
+          "title": "Atodo web",
+          "image": "https://msx.pp.ua/msx/img/atodo.png",
+          "action": "link:http://msx.atodo.fun/"
+       },
+       {
+          "title": "VoKino",
+          "image": "https://msx.pp.ua/msx/img/vokino.jpg",
+          "action": "link:http://web.vokino.tv/"
+       },
+       {
+          "title": "Akter Black",
+          "image": "https://msx.pp.ua/msx/img/akterblack.jpg",
+          "action": "link:http://abmsx.tech/"
+       },
+       {
+          "title": "Prisma",
+          "image": "https://msx.pp.ua/msx/img/prism.png",
+          "action": "link:https://prisma.ws/"
+       },
+       {
+          "title": "HDGO",
+          "image": "https://msx.pp.ua/msx/img/hdgo.png",
+          "action": "link:http://hdgo.me"
+       },
+       {
+          "title": "Radio On",
+          "action": "link:https://radioon.pp.ua"
+       }
+    ]
+ }
