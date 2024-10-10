@@ -1,3 +1,3 @@
 {
-  "action": "menu:request:interaction:menu@:https://youtube.com"
+  "action": "link:request:interaction:https://youtube.com"
 }
