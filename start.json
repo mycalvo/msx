@@ -1,6 +1,6 @@
 {    
     "name": "AntoñitoTV",
     "version": "1.0.0",
-    "parameter": "menu:https://mycalvo.github.io/msx/data/content.json",
+    "parameter": "menu:https://mycalvo.github.io/msx/data/menu.json",
     "welcome": "none"
 }
