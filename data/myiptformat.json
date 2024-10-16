@@ -1,0 +1,88 @@
+{
+  "headline":"calvo tv",
+  "style":"flat-separator",
+  "background":"http://msx.benzac.de/media/wallpaper2.jpg",
+  "menu":[
+    {
+      "icon":"info",
+      "label":"bienvenido",
+      "data":{
+        "pages":[
+          {
+            "items":[
+              {
+                "layout":"0,0,12,6",
+                "color":"msx-glass",
+                "headline":"WelcometotheIPTVPortalMSX",
+                "text":[
+                  "Thisportalisfree,legal,andopensource.",
+                  "ItusesmultipleM3Uplaylistsfrom{txt:msx-white:GitHub}projectstoprovideaccesstoaround10,000channelsfromaroundtheworld.",
+                  "AnM3UtoJSONconversionserviceisusedtoloadandtransformtheM3UplayliststoMSXJSONfiles.",
+                  "Thecodeoftheportalmainmenuisavailableon{txt:msx-white:CodePen},whichallowsyoutocreateyourcustomizedportalwithyourownplaylists.",
+                  "{br}{br}{txt:msx-white:RelatedLinks}{br}",
+                  "{ico:msx-white:live-tv}{txt:msx-white:https://github.com/Free-TV/IPTV}{br}",
+                  "{ico:msx-white:live-tv}{txt:msx-white:https://github.com/iptv-org/iptv}{br}",
+                  "{ico:msx-white:build}{txt:msx-white:https://codepen.io/benzac-de/pen/wvRoGzj}{br}",
+                  "{ico:msx-white:build}{txt:msx-white:https://msx.benzac.de/info/m3u.html}{br}",
+                  "{br}",
+                  "{ico:msx-blue:info}IfyouwouldliketoloadyourcustomizedportalonasmartTV,pleasefollowthesesteps:Pressthe{txt:msx-white:Export}buttoninthe{txt:msx-white:CodePen}previewwindow{ico:msx-white:arrow-forward}RegistertheexportedlinkwithaURLshortenerservice(e.g.{txt:msx-white:is.gd}){ico:msx-white:arrow-forward}InstallandlaunchtheMSXapponyoursmartTVandregisterastartparameterwiththesyntax:{col:msx-white}id:{{}SERVICE_ID{}}:{{}ALIAS{}}{col}(e.g.{txt:msx-white:id:igd:example}){ico:msx-white:arrow-forward}Forexample,aversionofthisportalcanbeloadedbyregisteringthestartparameter:{txt:msx-white:id:igd:vizeye}{ico:msx-white:arrow-forward}Formoreinformation,pleasecheckouttheMSXwikipages:{txt:msx-white:https://msx.benzac.de/wiki/}",
+                  "{br}{br}",
+                  "{ico:msx-blue:info}MediaStationX{txt:msx-white:0.1.145}orhigherisneededforthisservice."
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type":"separator",
+      "label":"TVtdt"
+
+},
+ {
+  "icon":"live-tv",
+      "label":"TVtdt",
+
+data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=https://mycalvo.github.io/msx/tvtdt.m3u"
+    },
+  {
+      "type":"separator",
+      "label":"25obt"
+    },
+
+    {
+      "icon":"live-tv",
+      "label":"25obtTS",
+      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=http://185.233.16.53:80/get.php?username=vi1024662&password=q9nRbvTHmav&type=m3u_plus&output=ts"
+    },
+    {
+      "icon":"live-tv",
+      "label":"25obtM3U8",
+      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=http://185.233.16.53:80/get.php?username=vi1024662&password=q9nRbvTHmav&type=m3u_plus&output=m3u8"
+    },
+    {
+      "type":"separator",
+      "label":"gord"
+    },
+    {
+      "icon":"live-tv",
+      "label":"gordTS",
+      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=http://kero50.ddnsking.com:8080/get.php?username=tt5av2BG66&password=EP11NHFoBG&type=m3u_plus&output=ts"
+    },
+
+{
+      "icon":"live-tv",
+      "label":"gordM3U8",
+      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=http://kero50.ddnsking.com:8080/get.php?username=tt5av2BG66&password=EP11NHFoBG&type=m3u_plus&output=m3u8"
+    },
+    {
+      "type":"separator"
+    },
+    {
+      "icon":"stars",
+      "label":"Favoritos",
+      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&context=favorites"
+    }
+  ]
+}
