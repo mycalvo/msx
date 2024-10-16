@@ -79,6 +79,15 @@
     {
       "type":"separator"
     },
+
+    {
+      "icon":"live-tv",
+      "label":"jsonsinpubli",
+      "data":"user:https://mycalvo.github.io/msx/data/services_m3u.phplist.json"
+    },
+      {
+      "type":"separator"
+    },
     {
       "icon":"stars",
       "label":"Favoritos",
