@@ -74,7 +74,7 @@
 {
       "icon":"live-tv",
       "label":"gordM3U8",
-      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=https://mycalvo.github.io/msx/data/m3u/gordM3u8.m3u"
+      "data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=https://mycalvo.github.io/msx/data/m3u/gordM3U8.m3u"
     },
     {
       "type":"separator"
