@@ -44,7 +44,7 @@
   "icon":"live-tv",
       "label":"TVtdt",
 
-data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=https://mycalvo.github.io/msx/tvtdt.m3u"
+"data":"user:http://msx.benzac.de/services/m3u.php?type=video&mode=extended&url=https://mycalvo.github.io/msx/tvtdt.m3u"
     },
   {
       "type":"separator",
