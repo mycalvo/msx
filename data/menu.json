@@ -1,7 +1,13 @@
 {
-  "type": "input",
-  "title": "Calculadora de Suma",
+  "headline": "Calculadora de Suma",
   "description": "Introduce dos números y presiona calcular",
+  "menu": [
+    {
+      "label": "Suma de números",
+      "action": "calcular"
+    }
+  ],
+  "type": "input",
   "inputs": [
     {
       "id": "number1",
