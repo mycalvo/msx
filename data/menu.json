@@ -1,4 +1,10 @@
 {
-         "label": "Item 1.1",
-         "data": "http://msx.benzac.de/info/data/content_placeholder.json"
-      },
+  "headline": "Calculadora de Suma",
+  "description": "Introduce dos números y presiona calcular",
+  "menu": [
+{
+         "label": "sumar content",
+         "data": "https://mycalvo.github.io/msx/data/contensumar.json"
+}
+  ]
+}
