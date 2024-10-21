@@ -23,7 +23,7 @@
             {
               "type": "button",  // Cambiado de submit a button para que sea seleccionable
               "label": "Calcular",
-              "action": "https://mycalvo.github.io/msx/sumar.html?action=sumar",
+              "action": "https://mycalvo.github.io/msx/index.html?action=sumar",
               "selectable": true  // Este campo indica que es seleccionable
             }
           ],
