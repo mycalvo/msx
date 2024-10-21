@@ -3,22 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suma en MSX</title>
+  <title>Calculadora</title>
+  <script>
+    window.addEventListener("message", function(event) {
+      var data = event.data;
+      var num1 = parseFloat(data.number1);
+      var num2 = parseFloat(data.number2);
+      var suma = num1 + num2;
+
+      // Envía el resultado de vuelta a Media Station X
+      window.parent.postMessage({ resultado: suma }, "*");
+    });
+  </script>
 </head>
 <body>
-  <h1>Calculadora de Suma</h1>
-  <input id="number1" type="number" placeholder="Número 1">
-  <input id="number2" type="number" placeholder="Número 2">
-  <button onclick="sumar()">Calcular</button>
-  <p id="resultado">Resultado: </p>
-
-  <script>
-    function sumar() {
-      var num1 = parseFloat(document.getElementById('number1').value);
-      var num2 = parseFloat(document.getElementById('number2').value);
-      var suma = num1 + num2;
-      document.getElementById('resultado').innerHTML = 'Resultado: ' + suma;
-    }
-  </script>
 </body>
 </html>
