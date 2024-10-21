@@ -7,7 +7,7 @@
                     "color": "msx-glass",
                     "headline": "Content Placeholder",
                     "text": "This is just a placeholder."
-                }],
+            },
 
   "type": "input",
   "inputs": [
@@ -34,7 +34,7 @@
     "id": "resultado",
     "label": "Resultado"
   }
-
+            ]           
 
       
         }]
