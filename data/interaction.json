@@ -1,0 +1,9 @@
+{
+  "actions": {
+    "sumar": {
+      "script": {
+        "code": "var num1 = parseFloat(data.number1); var num2 = parseFloat(data.number2); var suma = num1 + num2; document.getElementById('resultado').innerHTML = 'Resultado: ' + suma;"
+      }
+    }
+  }
+}
