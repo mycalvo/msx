@@ -21,10 +21,10 @@
           ],
           "actions": [
             {
-              "type": "button",  // Cambiado de submit a button para que sea seleccionable
+              "type": "button",
               "label": "Calcular",
               "action": "https://mycalvo.github.io/msx/index.html?action=sumar",
-              "selectable": true  // Este campo indica que es seleccionable
+              "selectable": true
             }
           ],
           "result": {
