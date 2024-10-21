@@ -4,7 +4,7 @@
     {
       "headline": "Calculadora de Suma",
       "description": "Introduce dos números y presiona calcular",
-      "content": [
+      "items": [
         {
           "type": "input",
           "inputs": [
