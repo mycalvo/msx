@@ -1,0 +1,41 @@
+{
+    "headline": "Calculadora en pages",
+    "pages": [{  
+            "items": [{
+                    "type": "default",
+                    "layout": "0,0,12,6",     
+                    "color": "msx-glass",
+                    "headline": "Content Placeholder",
+                    "text": "This is just a placeholder."
+                }],
+
+  "type": "input",
+  "inputs": [
+    {
+      "id": "number1",
+      "label": "Número 1",
+      "type": "number"
+    },
+    {
+      "id": "number2",
+      "label": "Número 2",
+      "type": "number"
+    }
+  ],
+  "actions": [
+    {
+      "type": "submit",
+      "label": "Calcular",
+      "action": "https://mycalvo.github.io/msx/index.html?action=sumar"
+    }
+  ],
+  "result": {
+    "type": "text",
+    "id": "resultado",
+    "label": "Resultado"
+  }
+
+
+      
+        }]
+}
