@@ -8,7 +8,7 @@
                     "headline": "Content Placeholder",
                     "text": "This is just a placeholder."
             },
-
+{
   "type": "input",
   "inputs": [
     {
@@ -21,7 +21,7 @@
       "label": "Número 2",
       "type": "number"
     }
-  ],
+  ]},
   "actions": [
     {
       "type": "submit",
