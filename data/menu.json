@@ -1,10 +1,34 @@
+
 {
   "headline": "Calculadora de Suma",
   "description": "Introduce dos números y presiona calcular",
-  "menu": [
-{
-         "label": "sumar content",
-         "data": "https://mycalvo.github.io/msx/data/contentsumar.json"
-}
+  "content": [
+    {
+      "type": "input",
+      "inputs": [
+        {
+          "id": "number1",
+          "label": "Número 1",
+          "type": "number"
+        },
+        {
+          "id": "number2",
+          "label": "Número 2",
+          "type": "number"
+        }
+      ],
+      "actions": [
+        {
+          "type": "submit",
+          "label": "Calcular",
+          "action": "https://mycalvo.github.io/msx/index.html?action=sumar"
+        }
+      ],
+      "result": {
+        "type": "text",
+        "id": "resultado",
+        "label": "Resultado"
+      }
+    }
   ]
 }
